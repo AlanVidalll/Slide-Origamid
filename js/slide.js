@@ -154,10 +154,10 @@ export class Slide {
   }
 }
 
-export class SlideNav extends Slide {
+export default class SlideNav extends Slide {
 
-  constructor(slide,wrapper){
-    super(slide,wrapper);
+  constructor(slide, wrapper) {
+    super(slide, wrapper);
     this.bindControlEvents();
   }
 
@@ -191,24 +191,22 @@ export class SlideNav extends Slide {
     this.wrapper.addEventListener('changeEvent', this.activeControlItem)
   }
 
-  activeControlItem(){
-    this.controlArray.forEach((item) =>{
+  activeControlItem() {
+    this.controlArray.forEach((item) => {
       item.classList.remove(this.activeClass)
     })
     this.controlArray[this.index.active].classList.add(this.activeClass);
   }
 
-  addControl(customControl){
+  addControl(customControl) {
     this.control = document.querySelector(customControl) || this.createColtrol();
     this.controlArray = [...this.control.children];
     this.activeControlItem();
     this.controlArray.forEach(this.eventControl);
   }
 
-  bindControlEvents(){
+  bindControlEvents() {
     this.eventControl = this.eventControl.bind(this)
     this.activeControlItem = this.activeControlItem.bind(this)
   }
-
-
 }
